@@ -1,0 +1,143 @@
+<?php
+
+class LupsController extends ControladorBase {
+
+    public function LupsController() {
+        parent::ControladorBase();
+    }
+    /**
+     *Este metodo es el principal carga el pilar, la seccion, maquina proyecto
+     *clasificacion, maquina,departamento,tipo de lup. 
+    */
+    public function index() {
+        #Cargar el formulario
+        $lup = new Lup();
+        $pilarArr = $lup->getPilarArray();
+        $proyectoArr = $lup->getProyectoArray();
+        $clasificaArr = $lup->getClasificacionArray();
+        $maquinaArr = $lup->getMaquinaArray();
+        $departamentoArr = $lup->getDepartamentoArray();
+        $tipoLup = $lup->getTipoLup();
+        $planta = $lup->getPlanta();
+        
+        $this->view("lups", 
+        array("maquina" => $maquinaArr,
+            "pilar" => $pilarArr,
+            "proyecto" => $proyectoArr,
+            "clasificacion" => $clasificaArr,
+            "departamento" => $departamentoArr,
+            "tipolup" => $tipoLup,
+            "planta" => $planta,
+            "mensajeError" => "<div class='alert alert-success text-center' role='alert'> Llenar los campos!</div>"
+        ));
+    }
+    
+    public function createLups(){
+        /*Validacion de los campos*/
+         $lups = new Lup();
+         
+            //Crear el noDeControl...
+            $planta = $this->generaPlanta($_POST['idPlanta']);
+            $tipoLup = $this->generaClave($_POST['idTipoLup']);
+            $maquina = $this->generaClave($_POST['idMaquina']);
+            
+            //
+            $idPlanta = $this->getIdvalor($_POST['idPlanta']);
+            $idTipoLup = $this->getIdvalor($_POST['idTipoLup']);
+            $idMaquina = $this->getIdvalor($_POST['idMaquina']);
+
+            $cad = $planta."-".$tipoLup."-".$maquina;
+            $num = $lups->contLup();
+            $noClave = $cad."-".$num;
+            
+            //Paso de Parametros...
+            $lups->setNoControl($noClave);
+            $lups->setIdPilar($_POST['idpilar']);
+            $lups->setIdProyecto($_POST['idProyecto']);
+            $lups->setIdTipoLup($idTipoLup);
+            $lups->setIdClasificacion($_POST['idClasificacion']);
+            $lups->setTitulo($_POST['titulo']);
+            $lups->setIdDepartamento($_POST['idDepartamento']);
+            $lups->setIdMaquina($idMaquina);
+            $lups->setIdMaquinaSeccion($_POST['idSeccion']);
+            $lups->setIdPlanta($idPlanta);
+            $lups->setElaboro($_POST['elaboro']);
+            $lups->setFechaElaboracion($_POST['fecha_elaboracion']);
+            $lups->setRevision($_POST['revision']);
+            $lups->setFechaRevision($_POST['fecha_revision']);
+            $lups->setAprobo($_POST['aprobo']);
+            $lups->setFechaAprobo($_POST['fecha_aprobacion']);
+            
+            //Subir archivo
+            $_FILES["file"]["name"] = $noClave.".pdf";
+            if(move_uploaded_file($_FILES["file"]["tmp_name"],"view/docs/lups/".$_FILES["file"]["name"])){
+               //Insertar los campos de la lups...
+                $lups->insert();
+                //Redirigue al inex...
+                $this->redirect('lups','index'); 
+            }else{
+                $this->redirect('lups','index'); 
+            }
+            
+    }
+    
+    
+    //Extraer la planta
+    function generaPlanta($cadena){
+        $cad = explode("-",$cadena);
+        $substra = substr($cad[1],0,3);
+        return $substra;
+    }
+    
+    //Extraer la cadena
+    function generaClave($cadena){
+        $cad = explode("-",$cadena);
+        $substra = substr($cad[1],0,2);
+        return $substra;
+    }
+    
+    //Extraer el id
+    function getIdvalor($cadena){
+        $cad = explode("-",$cadena);
+        return $cad[0];
+    }
+    
+    
+    //Read Lups
+    public function read() {
+         $lup = new Lup();
+         $datos = $lup->getAllInerJoin();
+        $this->view("readLup", array("datos" =>$datos));
+    }
+    
+    //Mostrar las Lups Cerradas
+    public function leerLup(){
+        $lup = new Lup();
+        $datos = $lup->getAllInerJoin();
+        $this->view("leerLup",array("datos" =>$datos));
+    }
+    
+    //Agregar las lups....
+    public function tratarLup() {
+        $lup = new Lup();
+        $datos = $lup->getArrayTratarLup();
+        $this->view("tratarLup",array("datos" =>$datos));
+    }
+    
+    //Revisar la lups...
+    public function revisarLup() {
+        $lup = new Lup();
+        $datos = $lup->getAllInerJoin();
+        $this->view("revisarLup",array("datos" =>$datos));
+    }
+    
+    //Aprovar las lups....
+    public function aprovarLup(){
+        $lup = new Lup();
+        $datos = $lup->getAllInerJoin();
+        $this->view("aprovarLup",array("datos" =>$datos));
+    }
+    
+}
+
+?>
