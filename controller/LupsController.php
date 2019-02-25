@@ -70,7 +70,7 @@ class LupsController extends ControladorBase {
             
             //Subir archivo
             $_FILES["file"]["name"] = $noClave.".pdf";
-            if(move_uploaded_file($_FILES["file"]["tmp_name"],"/view/docs/lups/".$_FILES["file"]["name"])){
+            if(move_uploaded_file($_FILES["file"]["tmp_name"],"view/docs/lups/".$_FILES["file"]["name"])){
                //Insertar los campos de la lups...
                 $lups->insert();
                 //Redirigue al inex...
