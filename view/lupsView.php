@@ -197,6 +197,12 @@
                                     ?>
                                 </select>
                             </div>
+                            <!-- Clave del PDF -->
+                            <div class="form-group col-md-12">
+                                <label for="exampleFormControlSelect1">Clave</label>
+                                <input class="form-control mr-sm-2" type="text" name="clave"  placeholder="Clave del Archivo PDF" required>
+                            </div>
+                            
                             <!--Quien Elaboro.... -->
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlSelect1">Elaboró</label>

@@ -48,7 +48,7 @@ class LupsController extends ControladorBase {
 
             $cad = $planta."-".$tipoLup."-".$maquina;
             $num = $lups->contLup();
-            $noClave = $cad."-".$num;
+            $noClave =$_POST['clave']."-".$num;
             
             //Paso de Parametros...
             $lups->setNoControl($noClave);
