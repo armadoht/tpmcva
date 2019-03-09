@@ -189,7 +189,7 @@
                                     <?php
                                     if (is_array($planta)) {
                                         foreach ($planta as $valor) {
-                                            if ($valor[9] != 0) {
+                                            if ($valor[10] != 0) {
                                                 echo "<option value='" . $valor[0] . "-" . $valor[2] . "'>" . strtoupper($valor[1]) . "</option>";
                                             }
                                         }
@@ -200,7 +200,7 @@
                             <!-- Clave del PDF -->
                             <div class="form-group col-md-12">
                                 <label for="exampleFormControlSelect1">Clave</label>
-                                <input class="form-control mr-sm-2" type="text" name="clave"  placeholder="Clave del Archivo PDF" required>
+                                <input class="form-control mr-sm-2" type="text" name="clave" required>
                             </div>
                             
                             <!--Quien Elaboro.... -->
