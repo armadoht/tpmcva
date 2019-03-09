@@ -103,13 +103,13 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlSelect1">Tipo de Lup</label>
-                                <select class="form-control" name="idTipoLup" required>
+                                <select class="form-control" name="idTipoLup" id="tipo" required>
                                     <option value=""></option>
                                     <?php
                                     if (is_array($tipolup)) {
                                         foreach ($tipolup as $valor) {
                                             if ($valor[3] != 0) {
-                                                echo "<option value='" . $valor[0] . "-" . $valor[1] . "'>" . strtoupper($valor[1]) . "</option>";
+                                                echo "<option value='" . $valor[0] . "-" . $valor[2] . "'>" . strtoupper($valor[1]) . "</option>";
                                             }
                                         }
                                     }
@@ -118,13 +118,13 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlSelect1">Clasificación</label>
-                                <select class="form-control" name="idClasificacion" required>
+                                <select class="form-control" name="idClasificacion" id="clasificacion" required>
                                     <option value=""></option>
                                     <?php
                                     if (is_array($clasificacion)) {
                                         foreach ($clasificacion as $valor) {
                                             if ($valor[3] != 0) {
-                                                echo "<option value='" . $valor[0] . "'>" . strtoupper($valor[1]) . "</option>";
+                                                echo "<option value='" . $valor[0] . "-" . $valor[2] . "'>" . strtoupper($valor[1]) . "</option>";
                                             }
                                         }
                                     }
@@ -139,7 +139,7 @@
                                     if (is_array($maquina)) {
                                         foreach ($maquina as $valor) {
                                             if ($valor[3] != 0) {
-                                                echo "<option value='" . $valor[0] . "-" . $valor[1] . "'>" . strtoupper($valor[1]) . "</option>";
+                                                echo "<option value='" . $valor[0] . "-" . $valor[2] . "'>" . strtoupper($valor[1]) . "</option>";
                                             }
                                         }
                                     }
@@ -184,13 +184,13 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlSelect1">Planta</label>
-                                <select class="form-control" name="idPlanta" required>
+                                <select class="form-control" name="idPlanta" id="planta" required>
                                     <option value=""></option>
                                     <?php
                                     if (is_array($planta)) {
                                         foreach ($planta as $valor) {
                                             if ($valor[10] != 0) {
-                                                echo "<option value='" . $valor[0] . "-" . $valor[2] . "'>" . strtoupper($valor[1]) . "</option>";
+                                                echo "<option value='" . $valor[0] . "-" . $valor[9] . "'>" . strtoupper($valor[1]) . "</option>";
                                             }
                                         }
                                     }
@@ -200,7 +200,7 @@
                             <!-- Clave del PDF -->
                             <div class="form-group col-md-12">
                                 <label for="exampleFormControlSelect1">Clave</label>
-                                <input class="form-control mr-sm-2" type="text" name="clave" required>
+                                <input class="form-control mr-sm-2" type="text" name="clave" id="clave-codigo" required>
                             </div>
                             
                             <!--Quien Elaboro.... -->
@@ -341,7 +341,7 @@
             });
         </script>
         <!-- Query de los trabajadores-->
-         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript">
             $(function () {
                 let availableTags;
@@ -453,6 +453,23 @@
            $("#validatedCustomFile").change(function (){
                $("#ruta_archivo").html("<h2>La ruta del archivo es:"+ $("#validatedCustomFile").val() +"</h2>");
            });
+        </script>
+        
+        <script type="text/javascript">
+            $("#planta").change(function (){
+                
+                let planta = $("#planta").val();
+                let tipo = $("#tipo").val();
+                let maquina = $("#maquinaSelect").val();
+                let clasificacion = $("#clasificacion").val();
+                
+                cad1=planta.split("-");
+                cad2=tipo.split("-");
+                cad3=maquina.split("-");
+                cad4=clasificacion.split("-");
+                calve = cad1[1]+"-"+cad2[1]+"-"+cad3[1]+"-"+cad4[1];
+                $("#clave-codigo").val(calve);
+            });
         </script>
         
     </body>

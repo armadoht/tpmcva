@@ -37,16 +37,11 @@ class LupsController extends ControladorBase {
          $lups = new Lup();
          
             //Crear el noDeControl...
-            $planta = $this->generaPlanta($_POST['idPlanta']);
-            $tipoLup = $this->generaClave($_POST['idTipoLup']);
-            $maquina = $this->generaClave($_POST['idMaquina']);
-            
-            //
             $idPlanta = $this->getIdvalor($_POST['idPlanta']);
             $idTipoLup = $this->getIdvalor($_POST['idTipoLup']);
             $idMaquina = $this->getIdvalor($_POST['idMaquina']);
+            $idClasificacion = $this->getIdvalor($_POST['idClasificacion']);
 
-            $cad = $planta."-".$tipoLup."-".$maquina;
             $num = $lups->contLup();
             $noClave =$_POST['clave']."-".$num;
             
@@ -55,7 +50,7 @@ class LupsController extends ControladorBase {
             $lups->setIdPilar($_POST['idpilar']);
             $lups->setIdProyecto($_POST['idProyecto']);
             $lups->setIdTipoLup($idTipoLup);
-            $lups->setIdClasificacion($_POST['idClasificacion']);
+            $lups->setIdClasificacion($idClasificacion);
             $lups->setTitulo($_POST['titulo']);
             $lups->setIdDepartamento($_POST['idDepartamento']);
             $lups->setIdMaquina($idMaquina);
