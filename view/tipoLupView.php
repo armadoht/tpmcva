@@ -77,6 +77,10 @@
                                 <label for="inputEmail4">Tipo de Lup</label>
                                 <input type="text" class="form-control" name="tipoLup" placeholder="Escribe el Tipo de Lup">
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Codigo de Tipo de Lup</label>
+                                <input type="text" class="form-control" name="codigo" placeholder="Codigo">
+                            </div>
                             <div class="form-group col-md-12">
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
@@ -98,6 +102,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Tipo de Lup</th>
+                                <th scope="col">Codigo</th>
                                 <th scope="col">Estatus</th>
                                 <th scope="col">Borrar</th>
                             </tr>
@@ -109,7 +114,8 @@
                                    echo "<tr>";
                                     echo "<th scope='row'>" . $valor[0] . "</th>";
                                     echo "<th>" . $valor[1] . "</th>";
-                                    if ($valor[2] == 1) {
+                                    echo "<th>" . $valor[2] . "</th>";
+                                    if ($valor[3] == 1) {
                                         echo "<th>"
                                         . "<a href='index.php?controller=tipoLup&action=updateTipoLup&idTipoLup=".$valor[0]."&valor=0'>Activo</a>"
                                         . "</th>";

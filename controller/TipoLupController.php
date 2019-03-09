@@ -20,6 +20,7 @@ class TipoLupController extends ControladorBase {
             $this->redirect('tipoLup','error');
         }else{
            $tipoLup->setNombre($_POST['tipoLup']);
+           $tipoLup->setCodigo($_POST['codigo']);
            $tipoLup->insert();
            $this->redirect('tipoLup','index'); 
         }
