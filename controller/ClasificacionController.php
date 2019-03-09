@@ -33,6 +33,7 @@ class ClasificacionController extends ControladorBase {
             $this->redirect("clasificacion","error");
         }else{
             $Clasificacion->setNombre($_POST['nombreClasificacion']);
+            $Clasificacion->setCodigo($_POST['codigo']);
             $Clasificacion->insert();
             $this->redirect("clasificacion","index");
         }

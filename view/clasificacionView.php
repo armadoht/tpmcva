@@ -77,6 +77,10 @@
                                 <label for="inputEmail4">Nombre del la Clasificación</label>
                                 <input type="text" class="form-control" name="nombreClasificacion" placeholder="Tipo de Clasificación">
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Codigo de Clasificación</label>
+                                <input type="text" class="form-control" name="codigo" placeholder="Codigo">
+                            </div>
                             <div class="form-group col-md-12">
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
@@ -90,6 +94,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nombre del la Clasificación</th>
+                                <th scope="col">Codigo de Clasificación</th>
                                 <th scope="col">Estatus</th>
                                 <th scope="col">Borrar</th>
                             </tr>
@@ -101,7 +106,8 @@
                                     echo "<tr>";
                                     echo "<th scope='row'>" . $valor[0] . "</th>";
                                     echo "<th>" . $valor[1] . "</th>";
-                                    if ($valor[2] == 1) {
+                                    echo "<th>" . $valor[2] . "</th>";
+                                    if ($valor[3] == 1) {
                                         echo "<th>"
                                         . "<a href='index.php?controller=clasificacion&action=updateClasificacion&idClasificacion=" . $valor[0] . "&valor=0'>Activo</a>"
                                         . "</th>";
