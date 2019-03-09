@@ -113,6 +113,10 @@
                                 <label for="inputEmail4">RFC</label>
                                 <input type="text" class="form-control" name="rfc" placeholder="">
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Codigo de Planta</label>
+                                <input type="text" class="form-control" name="codigoPlanta" placeholder="">
+                            </div>
 
                             <div class="form-group col-md-12">
                                 <button type="submit" class="btn btn-primary">Guardar</button>
@@ -139,6 +143,7 @@
                                 <th scope="col">CP</th>
                                 <th scope="col">Razon Social</th>
                                 <th scope="col">RFC</th>
+                                <th scope="col">Codigo</th>
                                 <th scope="col">Estatus</th>
                                 <th scope="col">Borrar</th>
                             </tr>
@@ -157,7 +162,8 @@
                                     echo "<th>" . $valor[6] . "</th>";
                                     echo "<th>" . $valor[7] . "</th>";
                                     echo "<th>" . $valor[8] . "</th>";
-                                    if ($valor[9] == 1) {
+                                    echo "<th>" . $valor[9] . "</th>";
+                                    if ($valor[10] == 1) {
                                         echo "<th>"
                                         . "<a href='index.php?controller=planta&action=updatePlanta&idPlanta=" . $valor[0] . "&valor=0'>Activo</a>"
                                         . "</th>";

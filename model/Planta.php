@@ -11,19 +11,24 @@ class Planta extends EntidadBase {
     private $cp;
     private $razonSocial;
     private $rfc;
+    private $codigo;
     private $estatus;
-
-    public function Planta() {
+    
+   public function Planta() {
         $table = "planta";
         parent::EntidadBase($table);
     }
 
     //Add Planta!
     public function insert() {
-        $query = "INSERT INTO `planta` (`idPlanta`, `nombre`, `iniciales`, `direccion`, `colonia`, `telefono`, `cp`, `razonSocial`, `rfc`, `estatus`)"
-                . " VALUES (NULL, '$this->nombre', '$this->iniciales', '$this->direccion', '$this->colonia', '$this->telefono', '$this->cp', 'ERROR', 'ERROR', '1');";
+        $query = "INSERT INTO `planta` (`idPlanta`, `nombre`, `iniciales`, `direccion`, `colonia`, `telefono`, `cp`, `razonSocial`, `rfc`, `codigoPlanta`, `estatus`)"
+                . " VALUES (NULL, '$this->nombre', '$this->iniciales', '$this->direccion', '$this->colonia', '$this->telefono', '$this->cp', '$this->razonSocial', '$this->rfc', '$this->codigo', '1');";
         $save = $this->db()->query($query);
         return $save;
+    }
+    
+    function getCodigo() {
+        return $this->codigo;
     }
 
     function getIdPlanta() {
@@ -105,7 +110,10 @@ class Planta extends EntidadBase {
     function setEstatus($estatus) {
         $this->estatus = $estatus;
     }
-
+    
+    function setCodigo($codigo) {
+        $this->codigo = $codigo;
+    }
 }
 ?>
 

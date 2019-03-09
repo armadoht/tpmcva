@@ -38,7 +38,7 @@ class PlantaController extends ControladorBase {
             $planta->setCp($_POST['cp']);
             $planta->setRazonSocial($_POST['razonS']);
             $planta->setRfc($_POST['rfc']);
-            
+            $planta->setCodigo($_POST['codigoPlanta']);            
             $planta->insert();
             $this->redirect("planta","index");
             
