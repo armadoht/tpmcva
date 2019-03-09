@@ -4,8 +4,9 @@ class Maquina extends EntidadBase {
 
     private $idMaquina;
     private $nombre;
+    private $codigo;
     private $estatus;
-
+    
     public function Maquina() {
         $table = "maquina";
         parent ::EntidadBase($table);
@@ -13,11 +14,19 @@ class Maquina extends EntidadBase {
 
     /* Insertar Maquina */
     public function insert() {
-        $query = "INSERT INTO `maquina` (`idMaquina`, `nombre`, `estatus`) VALUES (NULL, '$this->nombre', '1')";
+        $query = "INSERT INTO `maquina` (`idMaquina`, `nombre`,`codigoMaquina`, `estatus`) VALUES (NULL, '$this->nombre','$this->codigo','1')";
         $save = $this->db()->query($query);
         return $save;
     }
+    
+    function getCodigo() {
+        return $this->codigo;
+    }
 
+    function setCodigo($codigo) {
+        $this->codigo = $codigo;
+    }
+    
     function getIdMaquina() {
         return $this->idMaquina;
     }

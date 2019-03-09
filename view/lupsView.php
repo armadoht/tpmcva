@@ -138,7 +138,7 @@
                                     <?php
                                     if (is_array($maquina)) {
                                         foreach ($maquina as $valor) {
-                                            if ($valor[2] != 0) {
+                                            if ($valor[3] != 0) {
                                                 echo "<option value='" . $valor[0] . "-" . $valor[1] . "'>" . strtoupper($valor[1]) . "</option>";
                                             }
                                         }

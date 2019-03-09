@@ -29,6 +29,7 @@ class MaquinaController extends ControladorBase{
             $this->redirect("maquina","error");
         }else{
             $maquina->setNombre($_POST['nombreMaquina']);
+            $maquina->setCodigo($_POST['codigo']);
             $maquina->insert();
             $this->redirect("maquina","index");
         }
