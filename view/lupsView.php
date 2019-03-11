@@ -364,7 +364,7 @@
                         alert(data);
                     }
                 });
-
+                
                 console.log(arreglo);
                 $(".numEmpleado").autocomplete({
                     source: arreglo
@@ -468,7 +468,22 @@
                 cad3=maquina.split("-");
                 cad4=clasificacion.split("-");
                 calve = cad1[1]+"-"+cad2[1]+"-"+cad3[1]+"-"+cad4[1];
-                $("#clave-codigo").val(calve);
+                
+                
+                let idActividad = "acti";
+                $.ajax({
+                    data: {idActividad: idActividad},
+                    type: "POST",
+                    url: 'controller/json_numeroId.php',
+                    success: function (data) {
+                        let cont = data;
+                        $("#clave-codigo").val(calve +"-"+ cont);
+                    },
+                    error: function (data) {
+                        alert(data);
+                    }
+                });
+                
             });
         </script>
         
