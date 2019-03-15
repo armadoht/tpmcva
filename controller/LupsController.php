@@ -42,8 +42,8 @@ class LupsController extends ControladorBase {
             $idMaquina = $this->getIdvalor($_POST['idMaquina']);
             $idClasificacion = $this->getIdvalor($_POST['idClasificacion']);
 
-            $num = $lups->contLup();
-            $noClave =$_POST['clave']."-".$num;
+            //$num = $lups->contLup();
+            $noClave =$_POST['clave'];
             
             //Paso de Parametros...
             $lups->setNoControl($noClave);
