@@ -26,20 +26,16 @@ class EmpleadoController extends ControladorBase {
         #Cargar vista Maquina...
         $empleado = new Empleado();
         $empleado->setNumeroEmpleado($_POST['numeroEmpleado']);
-        if ($_POST['numeroEmpleado'] == '' || $_POST['nombreCompleto'] == '' || $_POST['idDepartamento'] == '' || $_POST['idNomina'] == ''|| $_POST['idPlanta'] == '') {
-            $this->redirect("empleado", "errorVacio");
+        if($empleado->buscarEmpleado()){
+            $this->redirect("empleado", "errorNumeroEmpleado");
         } else {
-            if ($empleado->buscarEmpleado()) {
-                $this->redirect("empleado", "errorNumeroEmpleado");
-            } else {
-                $empleado->setNombreCompleto($_POST['nombreCompleto']);
-                $empleado->setIdDepartamento($_POST['idDepartamento']);
-                $empleado->setIdNomina($_POST['idNomina']);
-                $empleado->setIdPlanta($_POST['idPlanta']);
-                $empleado->insert();
-                $this->redirect("empleado", "index");
-            }
-        }
+            $empleado->setNombreCompleto($_POST['nombreCompleto']);
+            $empleado->setIdDepartamento($_POST['idDepartamento']);
+            $empleado->setIdNomina($_POST['idNomina']);
+            $empleado->setIdPlanta($_POST['idPlanta']);
+            $empleado->insert();
+            $this->redirect("empleado", "index");
+        }   
     }
 
     

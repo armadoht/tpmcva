@@ -77,15 +77,15 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Numero de Empleado</label>
-                                <input type="text" class="form-control" name="numeroEmpleado" placeholder="Numero de Empleado">
+                                <input type="text" class="form-control" name="numeroEmpleado" placeholder="Numero de Empleado" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Nombre Completo</label>
-                                <input type="text" class="form-control" name="nombreCompleto" placeholder="Nombre Completo">
+                                <input type="text" class="form-control" name="nombreCompleto" placeholder="Nombre Completo" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Area</label>
-                                <select class="form-control" name="idDepartamento">
+                                <select class="form-control" name="idDepartamento" required>
                                     <option value=""></option>
                                     <?php
                                     if (is_array($departamento)) {
@@ -99,7 +99,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Tipo de Nomina</label>
-                                <select class="form-control" name="idNomina">
+                                <select class="form-control" name="idNomina" required>
                                     <option value=""></option>
                                     <?php
                                     if (is_array($nomina)) {
@@ -113,7 +113,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Planta</label>
-                                <select class="form-control" name="idPlanta">
+                                <select class="form-control" name="idPlanta" required>
                                     <option value=""></option>
                                     <?php
                                     if (is_array($planta)) {

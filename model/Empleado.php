@@ -18,9 +18,8 @@ class Empleado extends EntidadBase {
 
     /* Insertar Empleado */
     public function insert() {
-        $query = "INSERT INTO `empleado` (`idEmpleado`, `numeroEmpleado`, `nombreCompleto`, `idDepartamento`, `idNomina`,`idNomina`,`estatus`) "
-                . "VALUES (NULL, '$this->numeroEmpleado', '$this->nombreCompleto',"
-                . " '$this->idDepartamento', '$this->idNomina', '$this->idPlanta', '1')";
+        $query = "INSERT INTO `empleado` (`idEmpleado`, `numeroEmpleado`, `nombreCompleto`, `idDepartamento`, `idNomina`, `idPlanta`, `estatus`) "
+                . "VALUES (NULL, '$this->numeroEmpleado', '$this->nombreCompleto', '$this->idDepartamento', '$this->idNomina', '$this->idPlanta', '1');";
         $save = $this->db()->query($query);
         return $save;
     }
