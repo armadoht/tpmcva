@@ -1,0 +1,6 @@
+view/docs/lups/*
+config/database.php
+controller/json_numeroEmpleado.php
+controller/json_numeroId.php
+controller/json_session_maquina.php
+nbproject/private/private.xml
