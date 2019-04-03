@@ -22,10 +22,10 @@ class LoginController extends ControladorBase {
     
     public function usuarioActivo(){
         session_start();
-        if(isset($_SESSION['usuario'])){
+        if($_SESSION['permisos']== 0){
             $this->view("admin", array("Administrador" => "Bienvenido al administrador del sistema"));
-        } else {
-            $this->view("index", array("Pagina Principal" => "Pagina Principal"));
+        }else if($_SESSION['permisos']== 1){
+            $this->view("user", array("Usuario Clave" => "Bienvenido usuario clave"));
         }
     }
 
