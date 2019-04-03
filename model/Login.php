@@ -24,6 +24,19 @@ class Login extends EntidadBase {
             return false;
         }
     }
+    
+    public function permisos_usuario(){
+        $query = "SELECT * FROM login WHERE usuario = '$this->usuairo' and password = '$this->password'";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_array()){
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        } else {
+            return false;
+        }
+    }
 
     function getIdLogin() {
         return $this->idLogin;

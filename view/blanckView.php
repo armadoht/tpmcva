@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['permisos'],$_SESSION['usuario'])){
+         header("Location:index.php?controller=index&action=index");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

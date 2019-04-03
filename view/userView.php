@@ -64,7 +64,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <?php require_once("menuAdmin.php"); ?>
+                    <?php 
+                        if($_SESSION['permisos'] == 0){
+                            require_once("menuAdmin.php");
+                        }else{
+                            require_once("menuUsuario.php");
+                        }
+                    ?>
                 </div>
                 <div class='col-md-12'>
                     <div class="jumbotron">

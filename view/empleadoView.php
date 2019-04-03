@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['permisos'],$_SESSION['usuario'])){
+         header("Location:index.php?controller=index&action=index");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -68,7 +74,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <?php require_once("menuAdmin.php"); ?>
+                    <?php 
+                        if($_SESSION['permisos'] == 0){
+                            require_once("menuAdmin.php");
+                        }else{
+                            require_once("menuUsuario.php");
+                        }
+                    ?>
                     <!--.\ Nav Bar -->
                 </div>
                 <!-- .\ col-md-12 -->

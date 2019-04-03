@@ -54,7 +54,17 @@ class LoginController extends ControladorBase {
 
             if ($Login->validaUsuario()) {
                 $_SESSION['usuario'] = $_POST["user"];
-                $this->view("admin", array("Administrador" => "Bienvenido al administrador del sistema"));
+                 $datos = $Login->permisos_usuario();
+                 foreach($datos as $valor){
+                     $_SESSION['permisos'] = $valor[6];
+                 }
+                 //Permisos para los usuarios....
+                 if($_SESSION['permisos']== 0){
+                    $this->view("admin", array("Administrador" => "Bienvenido al administrador del sistema"));
+                 }else if($_SESSION['permisos']== 1){
+                    $this->view("user", array("Usuario Clave" => "Bienvenido usuario clave"));
+                 }
+                 
             } else {
                 $this->errorRegistro();
             }
