@@ -67,8 +67,10 @@
                     <?php 
                         if($_SESSION['permisos'] == 0){
                             require_once("menuAdmin.php");
-                        }else{
+                        }else if($_SESSION['permisos'] == 1){
                             require_once("menuUsuario.php");
+                        }else if($_SESSION['permisos'] == 2){
+                            require_once("menuOperador.php");
                         }
                     ?>
                 </div>
