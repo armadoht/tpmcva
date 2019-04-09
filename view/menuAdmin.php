@@ -44,7 +44,7 @@
                     <a class="dropdown-item" href="index.php?controller=departamento&action=index">Departamento</a>
                     <a class="dropdown-item" href="index.php?controller=planta&action=index">Planta</a>
                     <a class="dropdown-item" href="index.php?controller=empleado&action=index">Empleado</a>
-<!--                    <a class="dropdown-item" href="#">Acceso TPM</a>-->
+                    <a class="dropdown-item" href="index.php?controller=login&action=viewPermiso">Permisos TPM</a>
                 </div>
             </li>
             <li class="nav-item">

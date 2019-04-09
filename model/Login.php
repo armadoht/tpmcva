@@ -8,9 +8,11 @@ class Login extends EntidadBase {
     private $usuairo;
     private $password;
     private $fechaRegistro;
+    private $permisos;
+    private $idPlanta;
     private $estado;
-
-    public function Login() {
+    
+        public function Login() {
         $table = "login";
         parent ::EntidadBase($table);
     }
@@ -26,7 +28,38 @@ class Login extends EntidadBase {
     }
     
     public function permisos_usuario(){
-        $query = "SELECT * FROM login WHERE usuario = '$this->usuairo' and password = '$this->password'";
+        $query = "SELECT * FROM login WHERE (usuario = '$this->usuairo' and password = '$this->password') and (estatus = 1)";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_array()){
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        } else {
+            return false;
+        }
+    }
+
+    public function valida_numeroEmpleado(){
+        $query="SELECT * FROM `login` WHERE idEmpleado = '$this->idEmpleado'";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+    
+    public function insert_acceso(){
+        $query = "INSERT INTO `login` (`idLogin`, `idEmpleado`, `email`, `usuario`, `password`, `fechaRegistro`, `permisos`, `idPlanta`, `estatus`) VALUES"
+                . " (NULL, '$this->idEmpleado', '$this->email', '$this->usuairo', '$this->password', '$this->fechaRegistro', '$this->permisos', '$this->idPlanta', '1');";
+        $save = $this->db()->query($query);
+        return $save;
+    }
+    
+    public function accessos(){
+        $query = "SELECT * FROM `login` ";
         $result = $this->db()->query($query);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_array()){
@@ -92,6 +125,22 @@ class Login extends EntidadBase {
 
     function setEstado($estado) {
         $this->estado = $estado;
+    }
+    
+    function getPermisos() {
+        return $this->permisos;
+    }
+
+    function getIdPlanta() {
+        return $this->idPlanta;
+    }
+
+    function setPermisos($permisos) {
+        $this->permisos = $permisos;
+    }
+
+    function setIdPlanta($idPlanta) {
+        $this->idPlanta = $idPlanta;
     }
 
     /* QUERY INSERT
