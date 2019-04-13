@@ -63,6 +63,8 @@ class LoginController extends ControladorBase {
                     $this->view("admin", array("Administrador" => "Bienvenido al administrador del sistema"));
                  }else if($_SESSION['permisos']== 1){
                     $this->view("user", array("Usuario Clave" => "Bienvenido usuario clave"));
+                 }else if($_SESSION['permisos']== 2){
+                    $this->view("operador", array("Operador" => "Bienvenido al operador"));
                  }
                  
             } else {
