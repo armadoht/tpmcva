@@ -1,6 +1,6 @@
 <?php
 if(isset($_POST['idActividad']) && $_POST['idActividad'] == "acti"){
-   $con = new mysqli('localhost','root','','');
+   $con = new mysqli('localhost','root','','grupak_hgo');
    if($con){
        $query = "SELECT numeroEmpleado FROM `empleado` ORDER BY `idEmpleado` ASC";
        $result=$con->query($query);
@@ -15,7 +15,7 @@ if(isset($_POST['idActividad']) && $_POST['idActividad'] == "acti"){
    }
 }else if(isset($_POST['idActividad']) && $_POST['idActividad'] == "buscarNum"){
     $numempleado = $_POST['numero'];    
-    $con = new mysqli('localhost','root','','');
+    $con = new mysqli('localhost','root','','grupak_hgo');
      if($con){
        $query = "SELECT nombreCompleto FROM `empleado` WHERE numeroEmpleado = '$numempleado'";
        $result=$con->query($query);

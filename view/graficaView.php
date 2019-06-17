@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if(!isset($_SESSION['permisos'],$_SESSION['usuario'])){
          header("Location:index.php?controller=index&action=index");
     }
@@ -60,16 +61,17 @@
             </div>
         </header>
         <!-- .\ End -->
-        <!-- Texto descriptivo de la plataforma tpm-->
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Mostrar Lups</h3>
-                </div> 
+                    <h3>Crear Grafiacas!</h3>
+                </div>
             </div>
         </div>
+        
         <div class="bor"></div>
-        <!--Menu de la plataforma TPM -->
+        
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -82,53 +84,53 @@
                             require_once("menuOperador.php");
                         }
                     ?>
+                    <!--.\ Nav Bar -->
                 </div>
+                 
+                <div class="col-md-4">
+                    <div class="hero">
+                        <h2><span>Corrugado Cuernavaca</span></h2>
+			<div class="bor"></div>
+			<h1><?php echo $array_cva_corr; ?></h1>
+			<a class="btn btn-danger" href="">Ver mas...</a>
+                    </div>
+		</div>
+                <!--.\col-md-2-->
+                
+                <div class="col-md-4">
+                    <div class="hero">
+                        <h2><span>Corrugado Toluca</span></h2>
+			<div class="bor"></div>
+			<h1><?php echo $array_tol_corr; ?></h1>
+			<a class="btn btn-danger" href="">Ver mas...</a>
+                    </div>
+		</div>
+                <!--.\col-md-2-->
+                
+                <div class="col-md-4">
+                    <div class="hero">
+                        <h2><span>Papel Cuernavaca</span></h2>
+			<div class="bor"></div>
+			<h1><?php echo 0;?></h1>
+			<a class="btn btn-danger" href="">Ver mas...</a>
+                    </div>
+		</div>
+                <!--.\col-md-2-->
             </div>
+            <!--.\ end-row-->
         </div>
-        <!-- .\container-->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table" id="myTable">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">No Control</th>
-                                <th scope="col">Titulo</th>
-                                <th scope="col">Ver Archivo...</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (is_array($datos)) {
-                                $cont = 1;
-                                foreach ($datos as $valor) {
-                                    echo "<tr>";
-                                    echo "<th>" . strtoupper($valor[0]) . "</th>";
-                                    echo "<th>" . strtoupper($valor[1]) . "</th>";
-                                    echo "<th>" . $valor[6] . "</th>";
-                                    echo "<th><a href='view/docs/lups/".$valor[1].".pdf' target='_blank'>Abrir ".$valor[1].".pdf</a></th>";
-                                    echo "</tr>";
-                                    $cont++;
-                                }
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <!-- .\container-->
+        <!-- .\container -->
+
         <div class="bor"></div>
-        
+
         <?php include("footer.php") ?>
         <!-- .\ End -->
+
         <!-- jQuery -->
-        <script type="text/javascript" src="view/js/query/jquery-min.js"></script
-        <!-- Table JS -->
-        <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="view/js/query/jquery-min.js"></script>
         <!-- Bootstrap JS -->
         <script type="text/javascript" src="view/js/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript">
             $(document).ready( function () {
                 $('#myTable').DataTable();
@@ -136,4 +138,3 @@
         </script>
     </body>
 </html>
-

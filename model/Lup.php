@@ -41,17 +41,26 @@ class Lup extends EntidadBase{
     }
         
     
-    function getAllInerJoin(){
-        $query = "SELECT lup.idLup,lup.noControl,pilar.nombre,proyecto.nombre,tipolup.nombre,clasificacion.nombre,lup.titulo,departamento.nombre,maquina.nombre,maquinaseccion.nombre,lup.estatus "
-                . "FROM lup INNER JOIN pilar on lup.idPilar = pilar.idPilar "
-                . "INNER JOIN proyecto on lup.idProyecto = proyecto.idProyecto "
-                . "INNER JOIN tipolup on lup.idTipoLup = tipolup.idTipoLup "
-                . "INNER JOIN clasificacion on lup.idClasificacion = clasificacion.idClasificacion "
-                . "INNER JOIN departamento on lup.idDepartamento = departamento.idDepartamento "
-                . "INNER JOIN maquina on lup.idMaquina = maquina.idMaquina "
-                . "INNER JOIN maquinaseccion on lup.idMaquinaSeccion = maquinaseccion.idMaquinaSeccion "
-                . "WHERE lup.estatus = 1 "
-                . "ORDER BY `lup`.`idLup` ASC";
+    function getAllInerJoin($planta,$permiso){
+        
+        if($permiso == 0){
+           $condicion = "lup.estatus = 1 ORDER BY `lup`.`idLup` ASC";
+        }else{
+           $condicion = "lup.estatus = 1 and planta.idPlanta = ".$planta." ORDER BY `lup`.`idLup` ASC"; 
+        }
+        
+        $query = "SELECT lup.idLup,lup.noControl,pilar.nombre,proyecto.nombre,tipolup.nombre,clasificacion.nombre,lup.titulo,departamento.nombre,maquina.nombre,maquinaseccion.nombre,lup.estatus
+            FROM lup 
+            INNER JOIN pilar on lup.idPilar = pilar.idPilar 
+            INNER JOIN proyecto on lup.idProyecto = proyecto.idProyecto 
+            INNER JOIN tipolup on lup.idTipoLup = tipolup.idTipoLup 
+            INNER JOIN clasificacion on lup.idClasificacion = clasificacion.idClasificacion 
+            INNER JOIN departamento on lup.idDepartamento = departamento.idDepartamento 
+            INNER JOIN maquina on lup.idMaquina = maquina.idMaquina 
+            INNER JOIN maquinaseccion on lup.idMaquinaSeccion = maquinaseccion.idMaquinaSeccion
+            INNER JOIN planta on lup.idPlanta = planta.idPlanta
+            WHERE ".$condicion;
+        
         $result = $this->db()->query($query);
         if($result->num_rows > 0){
             while($row = $result->fetch_array()){

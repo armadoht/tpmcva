@@ -1,3 +1,4 @@
+
 <?php
 
 class LupsController extends ControladorBase {
@@ -107,8 +108,9 @@ class LupsController extends ControladorBase {
     
     //Mostrar las Lups Cerradas
     public function leerLup(){
+        session_start();
         $lup = new Lup();
-        $datos = $lup->getAllInerJoin();
+        $datos = $lup->getAllInerJoin($_SESSION['planta'],$_SESSION['permisos']);
         $this->view("leerLup",array("datos" =>$datos));
     }
     

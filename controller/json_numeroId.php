@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['idActividad']) && $_POST['idActividad'] == "acti"){
    
-    $con = new mysqli('','','','');
+    $con = new mysqli('localhost','root','','grupak_hgo');
     if($con){
        $query = "SELECT count(*) as total FROM lup";
        $result=$con->query($query);

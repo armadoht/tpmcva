@@ -57,6 +57,7 @@ class LoginController extends ControladorBase {
                  $datos = $Login->permisos_usuario();
                  foreach($datos as $valor){
                      $_SESSION['permisos'] = $valor[6];
+                     $_SESSION['planta'] = $valor[7];
                  }
                  //Permisos para los usuarios....
                  if($_SESSION['permisos']== 0){

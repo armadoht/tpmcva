@@ -107,6 +107,15 @@ function cargarControladorTipoLup(){
     return $controllerObj;
 }
 
+/*Cargar controlador Graficas*/
+function cargarControladorGrafica(){
+    $controlador = "GraficaController.php";
+    $strFileController = "controller/" . $controlador;
+    require_once $strFileController;
+    $controllerObj = new GraficaController();
+    return $controllerObj;
+}
+
 function cargarAction($controllerObj, $action) {
     $accion = $action;
     $controllerObj->$accion();

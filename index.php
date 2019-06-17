@@ -27,6 +27,8 @@ if (isset($_GET["controller"]) && $_GET['controller'] == 'login') {
     $controllerObj = cargarControladorSeccion();
 }else if(isset($_GET["controller"]) && $_GET['controller'] == 'tipoLup') {
     $controllerObj = cargarControladorTipoLup();
+}else if(isset($_GET["controller"]) && $_GET['controller'] == 'grafica'){
+    $controllerObj = cargarControladorGrafica();
 }else {
     $controllerObj = cargarControlador(CONTROLADOR_DEFECTO);
 }
