@@ -96,6 +96,7 @@
                                 <th scope="col">No Control</th>
                                 <th scope="col">Titulo</th>
                                 <th scope="col">Ver Archivo...</th>
+                                <th scope="col">Eliminar Archivo</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,6 +109,7 @@
                                     echo "<th>" . strtoupper($valor[1]) . "</th>";
                                     echo "<th>" . $valor[6] . "</th>";
                                     echo "<th><a href='view/docs/lups/".$valor[1].".pdf' target='_blank'>Abrir ".$valor[1].".pdf</a></th>";
+                                    echo "<th><a class='eliminar' href='#' rel='".$valor[0]."' >Eliminar</a></th>";
                                     echo "</tr>";
                                     $cont++;
                                 }
@@ -122,6 +124,28 @@
         <div class="bor"></div>
         
         <?php include("footer.php") ?>
+        
+        <div class="modal" tabindex="-1" role="dialog" id="myModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Alvertencia!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <h2>Estas seguro que quieres eliminar esta lup!</h2>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" id="delet-lup">Eliminar Lup</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        
         <!-- .\ End -->
         <!-- jQuery -->
         <script type="text/javascript" src="view/js/query/jquery-min.js"></script
@@ -130,9 +154,22 @@
         <!-- Bootstrap JS -->
         <script type="text/javascript" src="view/js/bootstrap/bootstrap.min.js"></script>
         <script type="text/javascript">
+            
+            var NUMCONTROL;
             $(document).ready( function () {
                 $('#myTable').DataTable();
             } );
+            
+            $(".eliminar").click(function (){
+                $('#myModal').modal('show');
+                NUMCONTROL = $(this).attr('rel');
+            });
+            
+            $("#delet-lup").click(function (){
+                var noControl = $(".eliminar").attr('rel');
+                location.href = 'index.php?controller=lups&action=deletedLup&valor='+NUMCONTROL;
+            });
+            
         </script>
     </body>
 </html>

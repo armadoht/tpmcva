@@ -24,6 +24,13 @@ class Lup extends EntidadBase{
         parent ::EntidadBase($table);
     }
     
+    //DELETE -> 1,0
+    function update($valor){
+        $query = "UPDATE `lup` SET `estatus` = '0' WHERE `lup`.`idLup` = $valor;";
+        return $save = $this->db()->query($query);
+         
+    }
+    
     /*Crear Lup*/
     function insert(){
         $fechaHora = date();

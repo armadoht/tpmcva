@@ -33,6 +33,12 @@ class LupsController extends ControladorBase {
         ));
     }
     
+    public function deletedLup(){
+        $lups = new Lup();
+        $lups->update($_GET['valor']);
+        $this->redirect("lups","leerLup");
+    }
+    
     public function createLups(){
         /*Validacion de los campos*/
          $lups = new Lup();
