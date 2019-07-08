@@ -6,28 +6,78 @@ class Grafica extends EntidadBase{
         parent ::EntidadBase($table);
     }
     
-    public function showCorrugadoCva(){
-	$query = "SELECT COUNT(*) FROM lup WHERE `idPlanta`= 1";
+    public function tipo(){
+	$query = "SELECT idTipoLup FROM `lup`";
 	$result = $this->db()->query($query);
-	if($result->num_rows > 0){
-            $cont = $result->fetch_row();
-            return  $cont[0];
-        }else{
-            return 0;
+        if($result->num_rows > 0){
+            while($row = $result->fetch_array()){
+                $resultSet[] = $row;
+            }
+            return $resultSet;
         }
-    }//showCorrugadoCva
+        return false;
+    }//showTipo
     
-    public function showCorrugadoTol(){
-	$query = "SELECT COUNT(*) FROM lup WHERE `idPlanta`= 3";
+    public function pilar(){
+	$query = "SELECT idPilar FROM `lup`";
 	$result = $this->db()->query($query);
-	if($result->num_rows > 0){
-            $cont = $result->fetch_row();
-            return  $cont[0];
-        }else{
-            return 0;
+        if($result->num_rows > 0){
+            while($row = $result->fetch_array()){
+                $resultSet[] = $row;
+            }
+            return $resultSet;
         }
-    }//showCorrugadoCva
- 
+        return false;
+    }//showPilar
+    
+    public function proyecto(){
+	$query = "SELECT idProyecto FROM `lup`";
+	$result = $this->db()->query($query);
+        if($result->num_rows > 0){
+            while($row = $result->fetch_array()){
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        }
+        return false;
+    }//showPilar
+    
+    public function empleado(){
+        $cont=0;
+        $query = "SELECT elaboro FROM `lup`";
+        $result = $this->db()->query($query);
+        if($result->num_rows > 0){
+            while($row = $result->fetch_array()){
+                $resultSet[] =strtoupper($row[0]); 
+            }
+            return $resultSet;
+        }
+        return false;
+    }
+    
+    public function datosPlanta() {
+        $query = "SELECT * FROM `planta`";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array()) {
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        }
+        return false;
+    }
+    
+    public function crearGraficaQuery($query){
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array()) {
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        }
+        return false;
+    }
+    
    
 }
 ?>

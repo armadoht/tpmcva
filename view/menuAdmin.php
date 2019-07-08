@@ -45,7 +45,19 @@
                     <a class="dropdown-item" href="index.php?controller=planta&action=index">Planta</a>
                     <a class="dropdown-item" href="index.php?controller=empleado&action=index">Empleado</a>
                     <a class="dropdown-item" href="index.php?controller=login&action=viewPermiso">Permisos TPM</a>
-                    <a class="dropdown-item" href="index.php?controller=grafica&action=index">Graficas de Lup´s</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Graficas de lups
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="index.php?controller=grafica&action=tipo">Por Tipo</a>
+                    <a class="dropdown-item" href="index.php?controller=grafica&action=pilar">Por Pilar</a>
+                    <a class="dropdown-item" href="index.php?controller=grafica&action=proyecto">Por Proyecto</a>
+                    <a class="dropdown-item" href="index.php?controller=grafica&action=persona">Por Persona</a>
+                    <a class="dropdown-item" href="index.php?controller=grafica&action=persona">Por Persona</a>
+                    <a class="dropdown-item" href="index.php?controller=grafica&action=index">Por Selección</a>
                 </div>
             </li>
             <li class="nav-item">

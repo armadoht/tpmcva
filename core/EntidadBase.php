@@ -125,6 +125,44 @@ class EntidadBase {
         }
         return false;
     }
+    
+    public function datosTipo() {
+        $query = "SELECT * FROM `tipolup`";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array()) {
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        }
+        return false;
+    }
+    
+    public function datosProyecto() {
+        $query = "SELECT * FROM `proyecto`";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array()) {
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        }
+        return false;
+    }
+    
+     public function datosPilar() {
+        $query = "SELECT * FROM `pilar`";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array()) {
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        }
+        return false;
+    }
+    
+    
 
     public function datosNomina() {
         $query = "SELECT * FROM `nomina`";
@@ -150,6 +188,8 @@ class EntidadBase {
         return false;
     }
     
+    
+    
     public function arrayMaquina() {
         $query = "SELECT * FROM `maquina`";
         $result = $this->db()->query($query);
@@ -162,17 +202,56 @@ class EntidadBase {
         return false;
     }
     
-//    //JSON
-//    public function jsonMaquinaSeccion($query){
-//        $result = $this->db()->query($query);
-//        if ($result->num_rows > 0) {
-//            while ($row = $result->fetch_array()) {
-//                $resultSet[] = $row;
-//            }
-//            return $resultSet;
-//        }
-//        return false;
-//    }
+    public function arrayTipo(){
+        $query = "SELECT nombre FROM `tipolup`";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array()) {
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        }
+        return false;
+    }
+    
+    public function arrayClasificacion(){
+        $query = "SELECT * FROM `clasificacion`";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array()) {
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        }
+        return false;
+    }
+    
+    //DATOS DE GRAFICAS SOLO EL NOMBRE....
+    public function arrayPilar(){
+        $query = "SELECT nombre FROM `pilar`";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array()) {
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        }
+        return false;
+    }
+    
+    public function arrayProyecto(){
+        $query = "SELECT nombre FROM `proyecto`";
+        $result = $this->db()->query($query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array()) {
+                $resultSet[] = $row;
+            }
+            return $resultSet;
+        }
+        return false;
+    }
+    
+    ///END DATOS DE GRAFICAS SOLO EL NOMBRE....
 
 }
 
