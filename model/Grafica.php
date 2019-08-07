@@ -17,6 +17,18 @@ class Grafica extends EntidadBase{
         }
         return false;
     }//showTipo
+
+    public function tipo_fecha_planta($finicio, $ffinal, $idplanta){
+        $query = "SELECT idTipoLup FROM `lup` WHERE (idPlanta = $idplanta) AND (fechaElaboracion BETWEEN '".$finicio."' AND '".$ffinal."')";
+        $result = $this->db()->query($query);
+            if($result->num_rows > 0){
+                while($row = $result->fetch_array()){
+                    $resultSet[] = $row;
+                }
+                return $resultSet;
+            }
+            return false;
+    }
     
     public function pilar(){
 	$query = "SELECT idPilar FROM `lup`";

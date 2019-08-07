@@ -56,7 +56,6 @@
                     <a class="dropdown-item" href="index.php?controller=grafica&action=pilar">Por Pilar</a>
                     <a class="dropdown-item" href="index.php?controller=grafica&action=proyecto">Por Proyecto</a>
                     <a class="dropdown-item" href="index.php?controller=grafica&action=persona">Por Persona</a>
-                    <a class="dropdown-item" href="index.php?controller=grafica&action=persona">Por Persona</a>
                     <a class="dropdown-item" href="index.php?controller=grafica&action=index">Por Selección</a>
                 </div>
             </li>

@@ -25,7 +25,23 @@ class GraficaController extends ControladorBase{
         $this->view("graficaMain", array("title" => "Grafica por Tipo de Lup",
             "datos" => $datos,"planta"=>$planta,"array_baseTipo" =>$array_baseTipo));
     }
-    
+
+
+    public function tipo_rango(){
+        #Cargar vista Grafica Tipo Rango...
+        $fecha_inicio = $_POST['fecha_inicio'];
+        $fecha_fin = $_POST['fecha_fin'];
+        $idPlanta =  $_POST['idPlanta'];
+
+        $Grafica = new Grafica();
+        $datos = $Grafica->tipo_fecha_planta($fecha_inicio, $fecha_fin , $idPlanta);
+        $array_baseTipo = $Grafica->arrayTipo();
+        $planta = $Grafica->datosPlanta();
+        $this->view("graficaMain", array("title" => "Grafica por Tipo de Lup",
+            "datos" => $datos,"planta"=>$planta,"array_baseTipo" =>$array_baseTipo));
+    }
+
+
     public function pilar() {
         #Cargar vista Grafica...
         $Grafica = new Grafica();

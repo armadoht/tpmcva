@@ -100,18 +100,18 @@
                 </div>
                 <!--.\col-md-12--> 
                 <div class="col-md-12">
-                    <form action="index.php?controller=grafica&action=personalizada" enctype='multipart/form-data' method="post">
+                    <form action="index.php?controller=grafica&action=tipo_rango" enctype='multipart/form-data' method="post">
                         <div class="form-row">
                             <!--Fecha de Inicio-->
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlSelect1">Fecha Inicio</label>
-                                <input type="date" class="form-control" name="fecha_elaboracion"  required>
+                                <input type="date" class="form-control" name="fecha_inicio"  required>
                             </div>
                             
                             <!--Fecha de Fin-->
                             <div class="form-group col-md-6">
                                 <label for="exampleFormControlSelect1">Fecha Fin</label>
-                                <input type="date" class="form-control" name="fecha_elaboracion"  required>
+                                <input type="date" class="form-control" name="fecha_fin"  required>
                             </div>
                             
                             <div class="form-group col-md-6">
@@ -122,7 +122,7 @@
                                     if (is_array($planta)) {
                                         foreach ($planta as $valor) {
                                             if ($valor[10] != 0) {
-                                                echo "<option value='" . $valor[0] . "-" . $valor[9] . "'>" . strtoupper($valor[1]) . "</option>";
+                                                echo "<option value='" . $valor[0] . "'>" . strtoupper($valor[1]) . "</option>";
                                             }
                                         }
                                     }
