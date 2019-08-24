@@ -1,3 +1,4 @@
+
 <?php
 class Lup extends EntidadBase{
     private $idLup;
@@ -16,21 +17,39 @@ class Lup extends EntidadBase{
     private $revision;
     private $fechaRevision;
     private $aprobo;
-    private $fechaAprobo;  
+    private $fechaAprobo;
     private $estatus;
-    
+
     public function Lup() {
         $table = "lup";
         parent ::EntidadBase($table);
     }
-    
+    //Update Lups
+    function updateLups($dato){
+      $query = "SELECT * FROM `lup`WHERE idLup = $dato";
+      $result = $this->db()->query($query);
+      if($result->num_rows > 0){
+          while($row = $result->fetch_array()){
+              $resultSet[] = $row;
+          }
+          return $resultSet;
+      }else {
+          return false;
+      }
+    }
+
     //DELETE -> 1,0
     function update($valor){
         $query = "UPDATE `lup` SET `estatus` = '0' WHERE `lup`.`idLup` = $valor;";
         return $save = $this->db()->query($query);
-         
     }
-    
+
+    //Solo se actualiza la fecha
+    function updateLupsFecha($valor){
+      $query ="UPDATE `lup` SET `fechaElaboracion` = '$this->fechaElaboracion',`fechaRevision` = '$this->fechaRevision', `fechaAprobo` = '$this->fechaAprobo' WHERE `lup`.`noControl` = '$valor'";
+      return $save = $this->db()->query($query);
+    }
+
     /*Crear Lup*/
     function insert(){
         $fechaHora = date();
@@ -39,35 +58,35 @@ class Lup extends EntidadBase{
         $save = $this->db()->query($query);
         return $save;
     }
-    
+
     function contLup(){
         $query = "SELECT count(*) as total FROM lup";
         $result = $this->db()->query($query);
         $data = $result->fetch_assoc();
         return  $data['total'] + 1;
     }
-        
-    
+
+
     function getAllInerJoin($planta,$permiso){
-        
+
         if($permiso == 0){
            $condicion = "lup.estatus = 1 ORDER BY `lup`.`idLup` ASC";
         }else{
-           $condicion = "lup.estatus = 1 and planta.idPlanta = ".$planta." ORDER BY `lup`.`idLup` ASC"; 
+           $condicion = "lup.estatus = 1 and planta.idPlanta = ".$planta." ORDER BY `lup`.`idLup` ASC";
         }
-        
+
         $query = "SELECT lup.idLup,lup.noControl,pilar.nombre,proyecto.nombre,tipolup.nombre,clasificacion.nombre,lup.titulo,departamento.nombre,maquina.nombre,maquinaseccion.nombre,lup.estatus
-            FROM lup 
-            INNER JOIN pilar on lup.idPilar = pilar.idPilar 
-            INNER JOIN proyecto on lup.idProyecto = proyecto.idProyecto 
-            INNER JOIN tipolup on lup.idTipoLup = tipolup.idTipoLup 
-            INNER JOIN clasificacion on lup.idClasificacion = clasificacion.idClasificacion 
-            INNER JOIN departamento on lup.idDepartamento = departamento.idDepartamento 
-            INNER JOIN maquina on lup.idMaquina = maquina.idMaquina 
+            FROM lup
+            INNER JOIN pilar on lup.idPilar = pilar.idPilar
+            INNER JOIN proyecto on lup.idProyecto = proyecto.idProyecto
+            INNER JOIN tipolup on lup.idTipoLup = tipolup.idTipoLup
+            INNER JOIN clasificacion on lup.idClasificacion = clasificacion.idClasificacion
+            INNER JOIN departamento on lup.idDepartamento = departamento.idDepartamento
+            INNER JOIN maquina on lup.idMaquina = maquina.idMaquina
             INNER JOIN maquinaseccion on lup.idMaquinaSeccion = maquinaseccion.idMaquinaSeccion
             INNER JOIN planta on lup.idPlanta = planta.idPlanta
             WHERE ".$condicion;
-        
+
         $result = $this->db()->query($query);
         if($result->num_rows > 0){
             while($row = $result->fetch_array()){
@@ -77,7 +96,7 @@ class Lup extends EntidadBase{
         }
         return false;
     }
-    
+
     //Valores para tratar lup
     function getArrayTratarLup(){
         $query = "SELECT * FROM `lup` WHERE `estatus` = 1";
@@ -90,9 +109,9 @@ class Lup extends EntidadBase{
         }
         return false;
     }
-    
-    
-    /*Numero de Control*/        
+
+
+    /*Numero de Control*/
     function ejecutarSQL($query){
         $result = $this->db()->query($query);
         if($result->num_rows == 1){
@@ -100,7 +119,7 @@ class Lup extends EntidadBase{
             return $resultSet;
         }
     }
-    
+
     /*Opcion de Pilar*/
     function getPilarArray(){
         $query = "SELECT * FROM `pilar`";
@@ -113,7 +132,7 @@ class Lup extends EntidadBase{
         }
         return false;
     }
-    
+
     /*Opcion de Proyecto*/
     function getProyectoArray(){
         $query = "SELECT * FROM `proyecto`";
@@ -126,7 +145,7 @@ class Lup extends EntidadBase{
         }
         return false;
     }
-    
+
     /*Opcion de Clasificación*/
     function getClasificacionArray(){
         $query = "SELECT * FROM `clasificacion`";
@@ -139,8 +158,8 @@ class Lup extends EntidadBase{
         }
         return false;
     }
-    
-       
+
+
     /*Opcion de Departamento*/
     function getDepartamentoArray(){
         $query = "SELECT * FROM `departamento`";
@@ -153,7 +172,7 @@ class Lup extends EntidadBase{
         }
         return false;
     }
-    
+
     /*Opcion de Maquina*/
     function getMaquinaArray(){
         $query = "SELECT * FROM `maquina`";
@@ -166,7 +185,7 @@ class Lup extends EntidadBase{
         }
         return false;
     }
-    
+
     /*Opcion de Tipo de Lup*/
     function getTipoLup(){
         $query = "SELECT * FROM `tipolup`";
@@ -179,8 +198,8 @@ class Lup extends EntidadBase{
         }
         return false;
     }
-    
-    
+
+
     /*Opcion de Planta*/
     function getPlanta(){
         $query = "SELECT * FROM `planta`";
@@ -193,11 +212,11 @@ class Lup extends EntidadBase{
         }
         return false;
     }
-    
+
     function getIdPlanta() {
         return $this->idPlanta;
     }
-    
+
     function getIdLup() {
         return $this->idLup;
     }
@@ -287,7 +306,7 @@ class Lup extends EntidadBase{
     function setNoControl($noControl) {
         $this->noControl = $noControl;
     }
-    
+
     function getIdMaquinaSeccion() {
         return $this->idMaquinaSeccion;
     }
@@ -295,7 +314,7 @@ class Lup extends EntidadBase{
     function setIdMaquinaSeccion($idMaquinaSeccion) {
         $this->idMaquinaSeccion = $idMaquinaSeccion;
     }
-    
+
     function getElaboro() {
         return $this->elaboro;
     }
@@ -346,4 +365,3 @@ class Lup extends EntidadBase{
 
 }
 ?>
-
