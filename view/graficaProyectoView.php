@@ -26,7 +26,7 @@
         <link rel="shortcut icon" href="view/img/favicon/grupak-favicon.ico">
         <!-- Graficas -->
         <link rel="stylesheet" type="text/css" href="view/css/chart/Chart.min.css">
-        
+
         <title>TPM || Mantenimiento Productivo Total</title>
     </head>
     <body>
@@ -70,13 +70,13 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="bor"></div>
-        
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <?php 
+                    <?php
                         if($_SESSION['permisos'] == 0){
                             require_once("menuAdmin.php");
                         }else if($_SESSION['permisos'] == 1){
@@ -91,18 +91,54 @@
             <!--.\ end-row-->
         </div>
         <!-- .\container -->
-        
+
         <!--Graficas con canvas-->
         <div class="container">
             <div class="row">
                <div class="col-md-12">
-                   <canvas id="popChart" width="600" height="400"></canvas> 
+                   <canvas id="popChart" width="600" height="400"></canvas>
                 </div>
-                <!--.\col-md-12--> 
+                <!--.\col-md-12-->
+                <div class="col-md-12">
+                    <form action="index.php?controller=grafica&action=graficaProyecto" enctype='multipart/form-data' method="post">
+                        <div class="form-row">
+                            <!--Fecha de Inicio-->
+                            <div class="form-group col-md-6">
+                                <label for="exampleFormControlSelect1">Fecha Inicio</label>
+                                <input type="date" class="form-control" name="fecha_inicio"  required>
+                            </div>
+
+                            <!--Fecha de Fin-->
+                            <div class="form-group col-md-6">
+                                <label for="exampleFormControlSelect1">Fecha Fin</label>
+                                <input type="date" class="form-control" name="fecha_fin"  required>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="exampleFormControlSelect1">Planta</label>
+                                <select class="form-control" name="idPlanta" id="planta" required>
+                                    <option value=""></option>
+                                    <?php
+                                    if (is_array($planta)) {
+                                        foreach ($planta as $valor) {
+                                            if ($valor[10] != 0) {
+                                                echo "<option value='" . $valor[0] . "'>" . strtoupper($valor[1]) . "</option>";
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                        </div>
+                         <button type="submit" class="btn btn-primary">Cargar Filtros</button>
+                    </form>
+                </div>
+                <!--.\col-md-12-->
             </div>
         </div>
-        
-        
+
+
         <div class="bor"></div>
 
         <?php include("footer.php") ?>
@@ -122,22 +158,22 @@
         <!-- Grafica -->
         <script type="text/javascript" src="view/js/chart/Chart.js"></script>
         <script type="text/javascript" src="view/js/chart/Chart.bundle.min.js"></script>
-        
+
         <script type="text/javascript">
             var array_baseProyecto = <?php echo json_encode($array_baseProyecto); ?>;
             var array_proyecto = <?php echo json_encode($datos); ?>;
             var tamanio = array_baseProyecto.length;
-            
+
             var tag = [];
             for(let i=0; i < tamanio; i++){
                 tag.push(array_baseProyecto[i].nombre);
             }
-            
+
             var valores = [];
             for(let i=0; i < array_proyecto.length; i++){
                 valores.push(array_proyecto[i].idProyecto);
             }
-            
+
             var datos = new Array(tamanio);
             datos.fill(0);
             var cont=0;
@@ -151,11 +187,11 @@
                 cont++;
             }
             console.log(datos);
-            
+
             var popCanvas= $("#popChar");
             var popCanvas = document.getElementById("popChart");
             var popCanvas = document.getElementById("popChart").getContext("2d");
-            
+
             var barChart = new Chart(popCanvas,{
                 type: 'bar',
                 data: {
@@ -198,13 +234,10 @@
                   }]
                 }
              });
-            
-            
+
+
         </script>
-        
-                
+
+
     </body>
 </html>
-
-
-

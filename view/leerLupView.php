@@ -97,6 +97,7 @@
                                 <th scope="col">Titulo</th>
                                 <th scope="col">Ver Archivo...</th>
                                 <th scope="col">Modificar</th>
+                                <th scope="col">Cancelar</th>
                                 <th scope="col">Eliminar Archivo</th>
                             </tr>
                         </thead>
@@ -111,6 +112,7 @@
                                     echo "<th>" . $valor[6] . "</th>";
                                     echo "<th><a href='view/docs/lups/".$valor[1].".pdf' target='_blank'>Abrir ".$valor[1].".pdf</a></th>";
                                     echo "<th><a class='modificar' href='#' rel='".$valor[0]."' >Modificar</a></th>";
+                                    echo "<th><a class='cancelar' href='#' rel='".$valor[0]."' >Cancelar</a></th>";
                                     echo "<th><a class='eliminar' href='#' rel='".$valor[0]."' >Eliminar</a></th>";
                                     echo "</tr>";
                                     $cont++;
@@ -141,7 +143,7 @@
                     <h2>Estas seguro que quieres eliminar esta lup!</h2>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                   <button type="button" class="btn btn-primary" id="delet-lup">Eliminar Lup</button>
                 </div>
               </div>
@@ -162,8 +164,29 @@
                     <h2>Estas seguro que quieres modificar la lup!</h2>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                   <button type="button" class="btn btn-primary" id="modificar-lup">Modificar Lup</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Modal para Cancelar la lup-->
+        <div class="modal" tabindex="-1" role="dialog" id="myModalCancelar">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Alvertencia!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <h2>Estas seguro que quieres cacelar la lup!</h2>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-primary" id="cancelar-lup">Cancelar Lup</button>
                 </div>
               </div>
             </div>
@@ -190,6 +213,12 @@
                 NUMCONTROL = $(this).attr('rel');
             });
 
+            //Modificar una lup
+            $(".cancelar").click(function (){
+                $('#myModalCancelar').modal('show');
+                NUMCONTROL = $(this).attr('rel');
+            });
+
             //Eliminar una lup
             $(".eliminar").click(function (){
                 $('#myModal').modal('show');
@@ -200,6 +229,12 @@
             $("#modificar-lup").click(function (){
                 var noControl = $(".modificar").attr('rel');
                 location.href = 'index.php?controller=lups&action=formUpdate&valor='+NUMCONTROL;
+            });
+
+            //modifiacr una lup
+            $("#cancelar-lup").click(function (){
+                var noControl = $(".cancelar").attr('rel');
+                location.href = 'index.php?controller=lups&action=canceLups&valor='+NUMCONTROL;
             });
 
             //Eliminar una lup

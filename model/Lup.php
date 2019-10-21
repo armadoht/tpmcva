@@ -44,6 +44,12 @@ class Lup extends EntidadBase{
         return $save = $this->db()->query($query);
     }
 
+    //CANCEL LUP -> 2,1
+    function cancelLup($valor){
+        $query = "UPDATE `lup` SET `estatus` = '2' WHERE `lup`.`idLup` = $valor;";
+        return $save = $this->db()->query($query);
+    }
+
     //Solo se actualiza la fecha
     function updateLupsFecha($valor){
       $query ="UPDATE `lup` SET `fechaElaboracion` = '$this->fechaElaboracion',`fechaRevision` = '$this->fechaRevision', `fechaAprobo` = '$this->fechaAprobo' WHERE `lup`.`noControl` = '$valor'";
@@ -67,12 +73,12 @@ class Lup extends EntidadBase{
     }
 
 
-    function getAllInerJoin($planta,$permiso){
+    function getAllInerJoin($planta,$permiso,$valor){
 
         if($permiso == 0){
-           $condicion = "lup.estatus = 1 ORDER BY `lup`.`idLup` ASC";
+           $condicion = "lup.estatus = ".$valor." ORDER BY `lup`.`idLup` ASC";
         }else{
-           $condicion = "lup.estatus = 1 and planta.idPlanta = ".$planta." ORDER BY `lup`.`idLup` ASC";
+           $condicion = "lup.estatus = ".$valor." and planta.idPlanta = ".$planta." ORDER BY `lup`.`idLup` ASC";
         }
 
         $query = "SELECT lup.idLup,lup.noControl,pilar.nombre,proyecto.nombre,tipolup.nombre,clasificacion.nombre,lup.titulo,departamento.nombre,maquina.nombre,maquinaseccion.nombre,lup.estatus

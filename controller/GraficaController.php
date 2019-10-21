@@ -2,7 +2,7 @@
 class GraficaController extends ControladorBase{
     public function GraficaController(){
         parent::ControladorBase();
-    } 
+    }
     public function index() {
         #Cargar vista Grafica...
         $Grafica = new Grafica();
@@ -15,7 +15,7 @@ class GraficaController extends ControladorBase{
         $this->view("grafica",array("title" =>"Filtro de Grafica","pilar"=>$pilar,"proyecto"=>$proyecto,"maquina"=>$maquina,"tipolup"=>$tipolup,
             "clasificacion"=>$clasificacion,"planta" => $planta));
     }
-    
+
     public function tipo() {
         #Cargar vista Grafica...
         $Grafica = new Grafica();
@@ -26,7 +26,7 @@ class GraficaController extends ControladorBase{
             "datos" => $datos,"planta"=>$planta,"array_baseTipo" =>$array_baseTipo));
     }
 
-
+    //Grafica por tipo de lup
     public function tipo_rango(){
         #Cargar vista Grafica Tipo Rango...
         $fecha_inicio = $_POST['fecha_inicio'];
@@ -34,11 +34,26 @@ class GraficaController extends ControladorBase{
         $idPlanta =  $_POST['idPlanta'];
 
         $Grafica = new Grafica();
-        $datos = $Grafica->tipo_fecha_planta($fecha_inicio, $fecha_fin , $idPlanta);
+        $datos = $Grafica->tipo_fecha_planta($fecha_inicio, $fecha_fin , $idPlanta,"idTipoLup");
         $array_baseTipo = $Grafica->arrayTipo();
         $planta = $Grafica->datosPlanta();
         $this->view("graficaMain", array("title" => "Grafica por Tipo de Lup",
             "datos" => $datos,"planta"=>$planta,"array_baseTipo" =>$array_baseTipo));
+    }
+
+    //Grafica por pilar fecha planta
+    public function graficaPilar(){
+        #Cargar vista Grafica Tipo Rango...
+        $fecha_inicio = $_POST['fecha_inicio'];
+        $fecha_fin = $_POST['fecha_fin'];
+        $idPlanta =  $_POST['idPlanta'];
+
+        $Grafica = new Grafica();
+        $datos = $Grafica->tipo_fecha_planta($fecha_inicio, $fecha_fin , $idPlanta,"idPilar");
+        $array_basePilar = $Grafica->arrayPilar();
+        $planta = $Grafica->datosPlanta();
+        $this->view("graficaPilar", array("title" => "Grafica por Pilar",
+            "datos" => $datos,"planta"=>$planta,"array_basePilar" =>$array_basePilar));
     }
 
 
@@ -51,7 +66,22 @@ class GraficaController extends ControladorBase{
         $this->view("graficaPilar", array("title" => "Grafica por Pilar",
             "datos" => $datos,"planta"=>$planta,"array_basePilar" => $array_basePilar ));
     }
-    
+
+    //Grafica por proyecto fecha planta
+    public function graficaProyecto(){
+        #Cargar vista Grafica Tipo Rango...
+        $fecha_inicio = $_POST['fecha_inicio'];
+        $fecha_fin = $_POST['fecha_fin'];
+        $idPlanta =  $_POST['idPlanta'];
+
+        $Grafica = new Grafica();
+        $datos = $Grafica->tipo_fecha_planta($fecha_inicio, $fecha_fin , $idPlanta,"idProyecto");
+        $array_baseProyecto = $Grafica->arrayProyecto();
+        $planta = $Grafica->datosPlanta();
+        $this->view("graficaProyecto", array("title" => "Grafica por Proyecto",
+            "datos" => $datos,"planta"=>$planta,"array_baseProyecto" =>$array_baseProyecto));
+    }
+
     public function proyecto(){
         $Grafica = new Grafica();
         $datos = $Grafica->proyecto();//Datos de las lups
@@ -60,14 +90,28 @@ class GraficaController extends ControladorBase{
         $this->view("graficaProyecto", array("title" => "Grafica por Proyecto",
             "datos" => $datos,"planta"=>$planta,"array_baseProyecto" => $array_baseProyecto ));
     }
-    
+
+    //Grafica por persona fecha planta
+    public function graficaEmpleado(){
+        #Cargar vista Grafica Tipo Rango...
+        $fecha_inicio = $_POST['fecha_inicio'];
+        $fecha_fin = $_POST['fecha_fin'];
+        $idPlanta =  $_POST['idPlanta'];
+
+        $Grafica = new Grafica();
+        $datos = $Grafica->tipo_fecha_empleado($fecha_inicio, $fecha_fin ,$idPlanta);
+        $planta = $Grafica->datosPlanta();
+        $this->view("graficaEmpleado", array("title" => "Grafica por empleados","datos" => $datos,"planta"=>$planta));
+    }
+
     public function persona(){
         #Cargar vista Grafica...
         $Grafica = new Grafica();
         $datos = $Grafica->empleado();//Datos de las lups
-        $this->view("graficaEmpleado", array("title" => "Grafica por Empleado","datos" => $datos));
+        $planta = $Grafica->datosPlanta();
+        $this->view("graficaEmpleado", array("title" => "Grafica por empleados","datos" => $datos,"planta" => $planta));
     }
-    
+
     public function crearGrafica(){
         //Valores del formulario para generar las graficas...
         $idPilar = $_POST['idPilar'];
@@ -75,14 +119,14 @@ class GraficaController extends ControladorBase{
         $idMaquina = $_POST['idMaquina'];
         $idTipoLup = $_POST['idTipoLup'];
         $idClasificacion = $_POST['idClasificacion'];
-        
+
         //Donde los valores de retorno...
         $idPlanta = $_POST['idPlanta'];
         $fecha_inicio = $_POST['fecha_inicio'];
         $fecha_fin = $_POST['fecha_final'];
-        
+
         //si los valores sero no adjuntarlos
-        
+
         $campos = '';
         if($idPilar != 0){
             $campos = $campos.'idPilar';
@@ -99,7 +143,7 @@ class GraficaController extends ControladorBase{
         if($idClasificacion != 0){
             $campos = $campos.',idClasificacion';
         }
-        
+
         $Grafica = new Grafica();
         $query = "SELECT ".$campos." FROM `lup` WHERE ((idPlanta = ".$idPlanta.") AND (fechaElaboracion BETWEEN '".$fecha_inicio."' AND '".$fecha_fin."')) AND (idPilar = ".$idPilar." and idProyecto=".$idProyecto." AND idMaquina = ".$idMaquina." AND idTipoLup = ".$idTipoLup." and idClasificacion = ".$idClasificacion.")";
         $query2 = "SELECT pilar.nombre, proyecto.nombre, maquina.nombre, tipolup.nombre, clasificacion.nombre "
@@ -109,12 +153,12 @@ class GraficaController extends ControladorBase{
                 . "INNER JOIN tipolup ON tipolup.idTipoLup = lup.idTipoLup "
                 . "INNER JOIN clasificacion ON clasificacion.idClasificacion = lup.idClasificacion "
                 . "WHERE pilar.idPilar = ".$idPilar." AND proyecto.idProyecto = ".$idProyecto." AND maquina.idMaquina = ".$idMaquina." AND tipolup.idTipoLup = ".$idTipoLup." AND clasificacion.idClasificacion = ".$idClasificacion;
-        
+
         $datos = $Grafica->crearGraficaQuery($query);
         $array = $Grafica->crearGraficaQuery($query2);
-        
+
         $this->view("graficaFiltro", array("title" => "Grafica por Filtro", "datos" => $datos, "array" => $array));
-        
+
     }
 }
 ?>

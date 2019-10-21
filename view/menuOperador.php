@@ -16,7 +16,8 @@ Acceso solo usuarios que registran las lups!
                     Seguimiento de Lup's
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="index.php?controller=lups&action=leerLup">Revisar Lup</a>                   
+                  <a class="dropdown-item" href="index.php?controller=lups&action=leerLupActiva">Lup´s Activa</a>
+                  <a class="dropdown-item" href="index.php?controller=lups&action=leerLupInactivas">Lup´s Inactivas</a>
                 </div>
             </li>
             <li class="nav-item">

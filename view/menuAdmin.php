@@ -15,12 +15,9 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="index.php?controller=lups&action=index">Creacion de Lup</a>
-                    <a class="dropdown-item" href="index.php?controller=lups&action=leerLup">Revisar Lup</a>
-                    <!-- Modificación de la apegartea la lup original....
-                    <a class="dropdown-item" href="index.php?controller=lups&action=tratarLup">Tratar Lup</a>
-                    <a class="dropdown-item" href="index.php?controller=lups&action=revisarLup">Revisar Lup</a>
-                    <a class="dropdown-item" href="index.php?controller=lups&action=aprovarLup">Aprovar Lup</a>
-                    -->
+                    <a class="dropdown-item" href="index.php?controller=lups&action=leerLupActiva">Lup´s Activa</a>
+                    <a class="dropdown-item" href="index.php?controller=lups&action=leerLupInactivas">Lup´s Inactivas</a>
+                    <a class="dropdown-item" href="index.php?controller=lups&action=leerLupEliminada">Lup´s Eliminadas</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -66,5 +63,3 @@
     </div>
 </nav>
 <!--.\ Nav Bar -->
-
-

@@ -62,7 +62,13 @@ class LupsController extends ControladorBase {
     public function deletedLup(){
         $lups = new Lup();
         $lups->update($_GET['valor']);
-        $this->redirect("lups","leerLup");
+        $this->redirect("leerLup","leerLup");
+    }
+
+    public function canceLups(){
+        $lups = new Lup();
+        $lups->cancelLup($_GET['valor']);
+        $this->redirect("leerLup","leerLup");
     }
 
     public function updateLups(){
@@ -169,11 +175,27 @@ class LupsController extends ControladorBase {
         $this->view("readLup", array("datos" =>$datos));
     }
 
-    //Mostrar las Lups Cerradas
-    public function leerLup(){
+    //Mostrar las Lups Activas
+    public function leerLupActiva(){
         session_start();
         $lup = new Lup();
-        $datos = $lup->getAllInerJoin($_SESSION['planta'],$_SESSION['permisos']);
+        $datos = $lup->getAllInerJoin($_SESSION['planta'],$_SESSION['permisos'],1);
+        $this->view("leerLup",array("datos" =>$datos));
+    }
+
+    //Mostrar las Lups Eliminadas
+    public function leerLupEliminada(){
+        session_start();
+        $lup = new Lup();
+        $datos = $lup->getAllInerJoin($_SESSION['planta'],$_SESSION['permisos'],0);
+        $this->view("leerLup",array("datos" =>$datos));
+    }
+
+    //Mostrar lups inactivas
+    public function leerLupInactivas(){
+        session_start();
+        $lup = new Lup();
+        $datos = $lup->getAllInerJoin($_SESSION['planta'],$_SESSION['permisos'],2);
         $this->view("leerLup",array("datos" =>$datos));
     }
 
