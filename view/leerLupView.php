@@ -96,9 +96,13 @@
                                 <th scope="col">No Control</th>
                                 <th scope="col">Titulo</th>
                                 <th scope="col">Ver Archivo...</th>
-                                <th scope="col">Modificar</th>
-                                <th scope="col">Cancelar</th>
-                                <th scope="col">Eliminar Archivo</th>
+                                <?php
+                                  if($_SESSION['permisos'] != 2){
+                                    echo '<th scope="col">Modificar</th>';
+                                    echo '<th scope="col">Cancelar</th>';
+                                    echo '<th scope="col">Eliminar Archivo</th>';
+                                  }
+                                ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,9 +115,11 @@
                                     echo "<th>" . strtoupper($valor[1]) . "</th>";
                                     echo "<th>" . $valor[6] . "</th>";
                                     echo "<th><a href='view/docs/lups/".$valor[1].".pdf' target='_blank'>Abrir ".$valor[1].".pdf</a></th>";
-                                    echo "<th><a class='modificar' href='#' rel='".$valor[0]."' >Modificar</a></th>";
-                                    echo "<th><a class='cancelar' href='#' rel='".$valor[0]."' >Cancelar</a></th>";
-                                    echo "<th><a class='eliminar' href='#' rel='".$valor[0]."' >Eliminar</a></th>";
+                                    if($_SESSION['permisos'] != 2){
+                                      echo "<th><a class='modificar' href='#' rel='".$valor[0]."' >Modificar</a></th>";
+                                      echo "<th><a class='cancelar' href='#' rel='".$valor[0]."' >Cancelar</a></th>";
+                                      echo "<th><a class='eliminar' href='#' rel='".$valor[0]."' >Eliminar</a></th>";
+                                    }
                                     echo "</tr>";
                                     $cont++;
                                 }
