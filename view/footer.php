@@ -8,7 +8,7 @@
                             <ul>
                                 <li><i class="fa fa-angle-right"></i><a href="#">Martin Espinoza - Gerente de Mantenimiento Corrugado</a></li>
                                 <li><i class="fa fa-angle-right"></i><a href="#">Juan Jose Flores - Coordinador de TPM</a></li>
-                                <li><i class="fa fa-angle-right"></i><a href="#">Neli Savedra - Coordinador de TPM</a></li>
+                                <li><i class="fa fa-angle-right"></i><a href="#">Neli Saavedra - Coordinador de TPM</a></li>
                             </ul>
                         </div>
                     </div>
